@@ -2,7 +2,7 @@ services:
   - type: worker
     name: discord-intake-bot
     env: node
-    plan: starter
+    plan: free           
     buildCommand: "npm ci"
     startCommand: "npm start"
     autoDeploy: true
