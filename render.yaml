@@ -1,0 +1,16 @@
+services:
+  - type: worker
+    name: discord-intake-bot
+    env: node
+    plan: starter
+    buildCommand: "npm ci"
+    startCommand: "npm start"
+    autoDeploy: true
+    region: oregon
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: N8N_WEBHOOK
+        sync: false
+      - key: CHANNEL_ID
+        sync: false
