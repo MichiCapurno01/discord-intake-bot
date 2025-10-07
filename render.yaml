@@ -1,16 +1,17 @@
 services:
-  - type: worker
-    name: discord-intake-bot
+  - type: web
+    name: discord-ad-search-bot
     env: node
-    plan: free           
-    buildCommand: "npm ci"
-    startCommand: "npm start"
-    autoDeploy: true
     region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
     envVars:
       - key: DISCORD_TOKEN
         sync: false
-      - key: N8N_WEBHOOK
+      - key: DISCORD_CLIENT_ID
         sync: false
-      - key: CHANNEL_ID
+      - key: N8N_WEBHOOK_URL
         sync: false
+    healthCheckPath: /
+    autoDeploy: true
