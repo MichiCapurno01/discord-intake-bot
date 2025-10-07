@@ -1,14 +1,32 @@
+
 {
-  "name": "discord-intake-bot",
-  "type": "module",
+  "name": "discord-ad-search-bot",
   "version": "1.0.0",
+  "description": "Discord bot for searching Meta/Facebook ads",
   "main": "index.js",
-  "engines": { "node": ">=20" },
-  "dependencies": {
-    "discord.js": "^14.16.3",
-    "node-fetch": "^3.3.2"
-  },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "ads",
+    "meta",
+    "facebook",
+    "n8n"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "axios": "^1.6.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.9.0"
   }
 }
