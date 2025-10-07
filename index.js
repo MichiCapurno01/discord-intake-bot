@@ -1,5 +1,6 @@
 const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder } = require('discord.js');
 const axios = require('axios');
+const express = require('express');
 require('dotenv').config();
 
 // Bot Configuration
@@ -13,6 +14,32 @@ const client = new Client({
 const TOKEN = process.env.DISCORD_TOKEN;
 const CLIENT_ID = process.env.DISCORD_CLIENT_ID;
 const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL;
+
+// Create Express server for Render health checks
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+    res.json({
+        status: 'online',
+        bot: client.user ? client.user.tag : 'Starting...',
+        uptime: Math.floor(process.uptime()),
+        timestamp: new Date().toISOString()
+    });
+});
+
+app.get('/health', (req, res) => {
+    res.json({ 
+        status: 'healthy', 
+        botReady: client.isReady(),
+        timestamp: new Date().toISOString() 
+    });
+});
+
+// Start Express server
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🌐 Health check server running on port ${PORT}`);
+});
 
 // Slash Command Definition
 const searchAdsCommand = new SlashCommandBuilder()
